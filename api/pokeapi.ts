@@ -1,6 +1,9 @@
-import { PokemonListResponse } from "@/types/pokemon";
+import { Pokemon, PokemonListResponse } from "@/types/pokemon";
 
-import { normalizePokemonListResponse } from "./normalizer";
+import {
+  normalizePokemonDetailedResponse,
+  normalizePokemonListResponse,
+} from "./normalizer";
 
 const BASE = "https://pokeapi.co/api/v2";
 const PAGE_LIMIT = 20;
@@ -15,4 +18,11 @@ export const getPokemonList = async (
   const res = await fetch(url);
   if (!res.ok) throw new Error(`List fetch failed: ${res.status}`);
   return normalizePokemonListResponse(await res.json());
+};
+
+export const getPokemonById = async (id: number): Promise<Pokemon> => {
+  const url = `${BASE}/pokemon/${id}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Pokemon fetch failed: ${res.status}`);
+  return normalizePokemonDetailedResponse(await res.json());
 };

@@ -18,14 +18,14 @@ export type Pokemon = {
   id: number;
   name: string;
   sprites?: {
-    front_default?: string | null;
-    back_default?: string | null;
+    front_default?: string;
+    back_default?: string;
   };
-  types?: { slot: number; type: { name: string } }[];
-  abilities?: { ability: { name: string } }[];
-  height?: number;
-  weight?: number;
-  stats?: { base_stat: number; effort: number; stat: { name: string } }[];
+  types?: string[];
+  abilities?: string[];
+  height?: string;
+  weight?: string;
+  stats?: { name: string; value: number }[];
   // Local-only fields
   __local?: boolean;
   __spriteOverride?: string;
