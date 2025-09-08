@@ -8,7 +8,7 @@ import Colors from "@/constants/Colors";
 import { Avatar } from "./Avatar";
 import { FavoriteButton } from "./FavoriteButton";
 
-export const PokemonCard = ({ id, name, url, sprite }: NamedAPIResource) => {
+export const PokemonCard = ({ name, url, sprite }: NamedAPIResource) => {
   const colorScheme = useColorScheme();
 
   const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
