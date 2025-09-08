@@ -44,7 +44,7 @@ export default function ListScreen() {
       )}
       {renderLoading()}
       <FloatingButton onPress={() => {}}>
-        <Link href="/new">
+        <Link href="/new" style={styles.newButton}>
           <FontAwesome name="plus" size={25} style={{ color: "white" }} />
         </Link>
       </FloatingButton>
@@ -66,5 +66,12 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     height: 1,
     width: "80%",
+  },
+  newButton: {
+    display: "flex",
+    width: 60,
+    lineHeight: 60,
+    borderRadius: 30,
+    textAlign: "center",
   },
 });

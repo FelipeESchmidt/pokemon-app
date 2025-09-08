@@ -23,10 +23,8 @@ export function FloatingButton({ children, onPress }: FloatingButtonProps) {
 const styles = StyleSheet.create({
   button: {
     position: "absolute",
-    bottom: 20,
-    right: 20,
-    width: 60,
-    height: 60,
+    bottom: 30,
+    right: 30,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
