@@ -1,4 +1,11 @@
-export type NamedAPIResource = { name: string; url: string };
+import { Href } from "expo-router";
+
+export type NamedAPIResource = {
+  id: number;
+  name: string;
+  url: Href;
+  sprite?: string;
+};
 
 export type PokemonListResponse = {
   count: number;
