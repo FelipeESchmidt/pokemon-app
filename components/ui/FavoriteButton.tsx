@@ -2,6 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet, useColorScheme, View } from "react-native";
 
 import Colors from "@/constants/Colors";
+import { useCallback } from "react";
 
 export interface FavoriteButtonProps {
   isFavorite: boolean;
@@ -14,12 +15,19 @@ export const FavoriteButton = ({
 }: FavoriteButtonProps) => {
   const colorScheme = useColorScheme();
 
+  const getColor = useCallback(() => {
+    if (isFavorite) {
+      return Colors[colorScheme ?? "light"].gold;
+    }
+    return Colors[colorScheme ?? "light"].text;
+  }, [colorScheme, isFavorite]);
+
   return (
     <View style={styles.container} onTouchEnd={onPress}>
       <FontAwesome
         name={isFavorite ? "star" : "star-o"}
         size={25}
-        color={Colors[colorScheme ?? "light"].text}
+        color={getColor()}
         style={styles.star}
       />
     </View>

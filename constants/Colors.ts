@@ -11,6 +11,7 @@ export default {
     cardBackground: "#f0f0f0",
     cardText: "#333",
     principal: "#0077ff",
+    gold: "#ffcc00",
   },
   dark: {
     text: "#fff",
@@ -21,5 +22,6 @@ export default {
     cardBackground: "#1a1a1a",
     cardText: "#fff",
     principal: "#0077ff",
+    gold: "#ffcc00",
   },
 };
