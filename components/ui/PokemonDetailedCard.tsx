@@ -7,6 +7,7 @@ import { Text, View } from "../Themed";
 import { Avatar } from "./Avatar";
 import { FavoriteButton } from "./FavoriteButton";
 import { PokemonStats } from "./PokemonStats";
+import { PokemonAbilities } from "./PokemonAbilities";
 
 export const PokemonDetailedCard = ({
   name,
@@ -54,22 +55,7 @@ export const PokemonDetailedCard = ({
           )}
         </UnthemedView>
       </UnthemedView>
-      <UnthemedView style={styles.abilitiesContainer}>
-        {abilities?.length ? (
-          abilities.map((ability) => (
-            <UnthemedView
-              key={ability}
-              style={[styles.abilityBadge, { backgroundColor: principalColor }]}
-            >
-              <Text style={styles.abilityText}>{ability}</Text>
-            </UnthemedView>
-          ))
-        ) : (
-          <Text style={[styles.details, { color: textColor }]}>
-            Abilities: Unknown
-          </Text>
-        )}
-      </UnthemedView>
+      <PokemonAbilities abilities={abilities} principalColor={principalColor} />
       <PokemonStats
         stats={stats}
         textColor={textColor}
@@ -131,36 +117,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 4,
     flex: 1,
-  },
-  abilitiesContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  abilityBadge: {
-    borderRadius: 12,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-  },
-  abilityText: {
-    textTransform: "capitalize",
-  },
-  statsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 4,
-  },
-  statRow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  statName: {
-    textTransform: "capitalize",
-  },
-  statValue: {
-    fontWeight: "bold",
   },
   sprite: {
     width: 128,
