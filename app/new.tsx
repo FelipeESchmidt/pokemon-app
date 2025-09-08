@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Text } from "@/components/Themed";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { generatePokemon } from "@/helpers/generatePokemon";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -13,7 +14,7 @@ const schema = z.object({
   sprite: z.string().url().optional(),
 });
 
-type FormData = z.infer<typeof schema>;
+export type NewPokemonFormData = z.infer<typeof schema>;
 
 export default function AddPokemonScreen() {
   const {
@@ -21,11 +22,12 @@ export default function AddPokemonScreen() {
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<NewPokemonFormData>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: NewPokemonFormData) => {
+    const completedPokemon = generatePokemon(data);
     Alert.alert("Success", `Added ${data.name}`);
   };
 
