@@ -5,26 +5,17 @@ import { NamedAPIResource } from "@/types/pokemon";
 import { useCustomStore } from "@/store/customPokemons";
 
 export const usePokemonList = () => {
-  const { getListAsSimple } = useCustomStore();
+  const { getListAsSimple, custom } = useCustomStore();
   const [page, setPage] = useState(1);
   const [hasNext, setHasNext] = useState(true);
   const [loading, setLoading] = useState(false);
   const [pokemonData, setPokemonData] = useState<NamedAPIResource[]>([]);
 
-  const handleSetPokemonData = (data: NamedAPIResource[], page: number) => {
-    const customData = getListAsSimple();
-    if (page === 1) {
-      setPokemonData([...customData, ...data]);
-      return;
-    }
-    setPokemonData((prev) => [...prev, ...data]);
-  };
-
   const handleFetchPokemonList = () => {
     setLoading(true);
     getPokemonList(page)
       .then(({ results, next }) => {
-        handleSetPokemonData(results, page);
+        setPokemonData((prev) => [...prev, ...results]);
         setHasNext(!!next);
       })
       .finally(() => setLoading(false));
@@ -38,6 +29,14 @@ export const usePokemonList = () => {
   useEffect(() => {
     handleFetchPokemonList();
   }, [page]);
+
+  useEffect(() => {
+    const customList = getListAsSimple();
+    const allLoadedPokemon = pokemonData.filter(
+      (p) => !p.url.toString().includes("custom")
+    );
+    setPokemonData([...customList, ...allLoadedPokemon]);
+  }, [custom]);
 
   return {
     pokemonData,
