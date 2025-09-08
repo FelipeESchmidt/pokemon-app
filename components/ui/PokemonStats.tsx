@@ -34,6 +34,7 @@ export const PokemonStats = ({
                 />
               </View>
             </View>
+            <Text style={{ color: textColor }}>{stat?.value}</Text>
           </View>
         ))
       ) : (
