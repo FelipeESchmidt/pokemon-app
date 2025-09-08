@@ -1,23 +1,24 @@
 import { Pokemon } from "@/types/pokemon";
 
 import { NewPokemonFormData } from "@/app/new";
+import { randomNumber } from "./randomNumber";
 
 const fakePokemonHeight = (): string => {
-  return (Math.floor(Math.random() * 10) + 1).toString();
+  return randomNumber(1, 6).toString();
 };
 
 const fakePokemonWeight = (): string => {
-  return (Math.floor(Math.random() * 100) + 1).toString();
+  return randomNumber(20, 100).toString();
 };
 
 const fakePokemonStats = (): { name: string; value: number }[] => {
   return [
-    { name: "hp", value: Math.floor(Math.random() * 100) + 1 },
-    { name: "attack", value: Math.floor(Math.random() * 100) + 1 },
-    { name: "defense", value: Math.floor(Math.random() * 100) + 1 },
-    { name: "special-attack", value: Math.floor(Math.random() * 100) + 1 },
-    { name: "special-defense", value: Math.floor(Math.random() * 100) + 1 },
-    { name: "speed", value: Math.floor(Math.random() * 100) + 1 },
+    { name: "hp", value: randomNumber(30, 150) },
+    { name: "attack", value: randomNumber(30, 150) },
+    { name: "defense", value: randomNumber(30, 150) },
+    { name: "special-attack", value: randomNumber(30, 150) },
+    { name: "special-defense", value: randomNumber(30, 150) },
+    { name: "speed", value: randomNumber(30, 150) },
   ];
 };
 
