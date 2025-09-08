@@ -10,6 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
+import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 
 export {
@@ -54,8 +55,17 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="pages" options={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
+          headerTintColor: Colors[colorScheme ?? "light"].tint,
+          headerTitleStyle: { fontWeight: "600" },
+          title: "Pokédex",
+        }}
+      >
+        <Stack.Screen name="index" />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
