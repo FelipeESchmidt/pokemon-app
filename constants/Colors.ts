@@ -12,6 +12,7 @@ export default {
     cardText: "#333",
     principal: "#0077ff",
     gold: "#ffcc00",
+    danger: "#b91c1c",
   },
   dark: {
     text: "#fff",
@@ -23,5 +24,6 @@ export default {
     cardText: "#fff",
     principal: "#0077ff",
     gold: "#ffcc00",
+    danger: "#b91c1c",
   },
 };
