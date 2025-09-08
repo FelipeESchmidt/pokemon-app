@@ -11,8 +11,6 @@ export const getPokemonList = async (
   const offset = (page - 1) * PAGE_LIMIT;
   const limit = PAGE_LIMIT;
 
-  await new Promise((resolve) => setTimeout(resolve, 10000));
-
   const url = `${BASE}/pokemon?limit=${limit}&offset=${offset}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`List fetch failed: ${res.status}`);
