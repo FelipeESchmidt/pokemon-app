@@ -1,11 +1,13 @@
 import { ScrollView, StyleSheet, Alert } from "react-native";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "expo-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Text } from "@/components/Themed";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { useCustomStore } from "@/store/customPokemons";
 import { generatePokemon } from "@/helpers/generatePokemon";
 
 const schema = z.object({
@@ -17,6 +19,9 @@ const schema = z.object({
 export type NewPokemonFormData = z.infer<typeof schema>;
 
 export default function AddPokemonScreen() {
+  const router = useRouter();
+  const { add } = useCustomStore();
+
   const {
     register,
     setValue,
@@ -28,6 +33,8 @@ export default function AddPokemonScreen() {
 
   const onSubmit = (data: NewPokemonFormData) => {
     const completedPokemon = generatePokemon(data);
+    add(completedPokemon);
+    router.back();
     Alert.alert("Success", `Added ${data.name}`);
   };
 
