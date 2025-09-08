@@ -1,14 +1,16 @@
 import { Link } from "expo-router";
 import { View as UnthemedView, StyleSheet, useColorScheme } from "react-native";
 
-import { NamedAPIResource } from "@/types/pokemon";
-
-import { Text, View } from "../Themed";
 import Colors from "@/constants/Colors";
+import { NamedAPIResource } from "@/types/pokemon";
+import { useFavoritesPokemons } from "@/store/favoritesPokemons";
+
 import { Avatar } from "./Avatar";
+import { Text, View } from "../Themed";
 import { FavoriteButton } from "./FavoriteButton";
 
-export const PokemonCard = ({ name, url, sprite }: NamedAPIResource) => {
+export const PokemonCard = ({ id, name, url, sprite }: NamedAPIResource) => {
+  const { isFavorite, change } = useFavoritesPokemons();
   const colorScheme = useColorScheme();
 
   const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
@@ -16,16 +18,21 @@ export const PokemonCard = ({ name, url, sprite }: NamedAPIResource) => {
   const principalColor = Colors[colorScheme ?? "light"].principal;
 
   return (
-    <View style={[styles.card, { backgroundColor }]}>
-      <Avatar uri={sprite} style={styles.sprite} />
-      <UnthemedView style={styles.infoContainer}>
-        <Text style={[styles.title, { color: textColor }]}>{name}</Text>
-        <Link href={url} style={[styles.details, { color: principalColor }]}>
-          Press for details
-        </Link>
-      </UnthemedView>
-      <FavoriteButton isFavorite={Math.random() < 0.5} onPress={() => {}} />
-    </View>
+    <Link href={url}>
+      <View style={[styles.card, { backgroundColor }]}>
+        <Avatar uri={sprite} style={styles.sprite} />
+        <UnthemedView style={styles.infoContainer}>
+          <Text style={[styles.title, { color: textColor }]}>{name}</Text>
+          <Text style={[styles.details, { color: principalColor }]}>
+            Press for details
+          </Text>
+        </UnthemedView>
+        <FavoriteButton
+          isFavorite={isFavorite(id)}
+          onPress={() => change(id)}
+        />
+      </View>
+    </Link>
   );
 };
 

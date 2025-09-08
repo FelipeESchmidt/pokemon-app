@@ -2,6 +2,7 @@ import { View as UnthemedView, StyleSheet, useColorScheme } from "react-native";
 
 import { Pokemon } from "@/types/pokemon";
 import Colors from "@/constants/Colors";
+import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 
 import { Text, View } from "../Themed";
 import { Avatar } from "./Avatar";
@@ -10,6 +11,7 @@ import { PokemonStats } from "./PokemonStats";
 import { PokemonAbilities } from "./PokemonAbilities";
 
 export const PokemonDetailedCard = ({
+  id,
   name,
   sprites,
   height,
@@ -18,6 +20,7 @@ export const PokemonDetailedCard = ({
   abilities,
   stats,
 }: Pokemon) => {
+  const { isFavorite, change } = useFavoritesPokemons();
   const colorScheme = useColorScheme();
 
   const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
@@ -30,7 +33,10 @@ export const PokemonDetailedCard = ({
         <UnthemedView style={styles.infoContainer}>
           <Text style={[styles.title, { color: textColor }]}>{name}</Text>
         </UnthemedView>
-        <FavoriteButton isFavorite={Math.random() < 0.5} onPress={() => {}} />
+        <FavoriteButton
+          isFavorite={isFavorite(id)}
+          onPress={() => change(id)}
+        />
       </UnthemedView>
       <UnthemedView style={styles.middleContainer}>
         <Avatar
