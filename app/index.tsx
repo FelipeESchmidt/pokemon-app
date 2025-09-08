@@ -1,9 +1,12 @@
+import { useMemo } from "react";
+import { Link } from "expo-router";
 import { FlatList, StyleSheet } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 import { usePokemonList } from "@/hooks/usePokemonList";
 import { Text, View } from "@/components/Themed";
+import { FloatingButton } from "@/components/ui/FloatingButton";
 import { PokemonCard, PokemonCardLoading } from "@/components/ui/PokemonCard";
-import { useMemo } from "react";
 
 export default function ListScreen() {
   const { pokemonData, loading, handleEndReached } = usePokemonList();
@@ -40,6 +43,11 @@ export default function ListScreen() {
         />
       )}
       {renderLoading()}
+      <FloatingButton onPress={() => {}}>
+        <Link href="/new">
+          <FontAwesome name="plus" size={25} style={{ color: "white" }} />
+        </Link>
+      </FloatingButton>
     </View>
   );
 }
