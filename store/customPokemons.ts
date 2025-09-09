@@ -8,9 +8,16 @@ import { Href } from "expo-router";
 type CustomState = {
   custom: Pokemon[];
   add: (p: Pokemon) => Pokemon;
-  get: (id: number) => Pokemon | undefined;
-  remove: (id: number) => void;
+  get: (idOrName: string) => Pokemon | undefined;
+  remove: (idOrName: string) => void;
   getListAsSimple: () => NamedAPIResource[];
+};
+
+const findByIdOrName = (pokemon: Pokemon, idOrName: string): boolean => {
+  const idOrNameLower = idOrName.toLowerCase().trim();
+  const pokemonNameLower = pokemon.name.toLowerCase().trim();
+
+  return pokemon.id === Number(idOrName) || pokemonNameLower === idOrNameLower;
 };
 
 export const useCustomStore = create<CustomState>()(
@@ -26,13 +33,16 @@ export const useCustomStore = create<CustomState>()(
           (pokemon): NamedAPIResource => ({
             id: pokemon.id,
             name: pokemon.name,
-            url: ("custom/" + pokemon.id) as Href,
+            url: ("pokemon/" + pokemon.id) as Href,
             sprite: pokemon.sprites?.front_default,
           })
         );
       },
-      get: (id) => get().custom.find((p) => p.id === id),
-      remove: (id) => set({ custom: get().custom.filter((p) => p.id !== id) }),
+      get: (idOrName) => get().custom.find((p) => findByIdOrName(p, idOrName)),
+      remove: (idOrName) =>
+        set({
+          custom: get().custom.filter((p) => !findByIdOrName(p, idOrName)),
+        }),
     }),
     {
       name: "custom-pokemon-store",
