@@ -9,7 +9,8 @@ import { Avatar } from "./Avatar";
 import { Text, View } from "../Themed";
 import { FavoriteButton } from "./FavoriteButton";
 
-export const PokemonCard = ({ id, name, url, sprite }: NamedAPIResource) => {
+export const PokemonCard = (pokemon: NamedAPIResource) => {
+  const { name, url, sprite } = pokemon;
   const { isFavorite, change } = useFavoritesPokemons();
   const colorScheme = useColorScheme();
 
@@ -28,8 +29,8 @@ export const PokemonCard = ({ id, name, url, sprite }: NamedAPIResource) => {
           </Text>
         </UnthemedView>
         <FavoriteButton
-          isFavorite={isFavorite(id)}
-          onPress={() => change(id)}
+          isFavorite={isFavorite(pokemon)}
+          onPress={() => change(pokemon)}
         />
       </View>
     </Link>

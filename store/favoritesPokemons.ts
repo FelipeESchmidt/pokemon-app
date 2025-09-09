@@ -2,24 +2,34 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { NamedAPIResource } from "@/types/pokemon";
+
 type FavoriteState = {
-  favorites: number[];
-  change: (id: number) => void;
-  isFavorite: (name: number) => boolean;
+  favorites: NamedAPIResource[];
+  change: (pokemon: NamedAPIResource) => void;
+  isFavorite: (name: NamedAPIResource) => boolean;
+};
+
+const checkIfIsFavorite = (
+  favorites: NamedAPIResource[],
+  pokemon: NamedAPIResource
+) => {
+  return !!favorites.find((fav) => fav.name === pokemon.name);
 };
 
 export const useFavoritesPokemons = create<FavoriteState>()(
   persist(
     (set, get) => ({
       favorites: [],
-      change: (id) => {
-        if (get().favorites.includes(id)) {
-          set({ favorites: get().favorites.filter((favId) => favId !== id) });
+      change: (pokemon) => {
+        const favorites = get().favorites;
+        if (checkIfIsFavorite(favorites, pokemon)) {
+          set({ favorites: favorites.filter(({ id }) => id !== pokemon.id) });
         } else {
-          set({ favorites: [id, ...get().favorites] });
+          set({ favorites: [pokemon, ...favorites] });
         }
       },
-      isFavorite: (id) => get().favorites.includes(id),
+      isFavorite: (pokemon) => checkIfIsFavorite(get().favorites, pokemon),
     }),
     {
       name: "favorites-pokemon-store",
