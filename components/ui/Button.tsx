@@ -25,7 +25,7 @@ export const Button: React.FC<ButtonProps> = ({ onPress, text }) => {
 const styles = StyleSheet.create({
   btn: {
     marginTop: 8,
-    paddingVertical: 12,
+    padding: 12,
     borderRadius: 10,
     alignItems: "center",
   },
