@@ -12,7 +12,7 @@ import Colors from "@/constants/Colors";
 import { Text } from "../Themed";
 
 export interface InputProps extends TextInputProps {
-  label: string;
+  label?: string;
   error?: FieldError;
   customErrorMessage?: string;
 }
@@ -29,7 +29,7 @@ export function Input({
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={{ color: textColor }}>{label}</Text>
+      {!!label && <Text style={{ color: textColor }}>{label}</Text>}
       <TextInput
         {...inputProps}
         onChangeText={(t) => inputProps.onChangeText?.(t)}
@@ -47,6 +47,7 @@ export function Input({
 const styles = StyleSheet.create({
   label: { fontWeight: "bold" },
   inputContainer: {
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: 8,
