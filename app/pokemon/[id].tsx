@@ -8,6 +8,7 @@ import {
   PokemonDetailedCardLoading,
 } from "@/components/ui/PokemonDetailedCard";
 import { Button } from "@/components/ui/Button";
+import { PokemonNotFoundCard } from "@/components/ui/PokemonNotFoundCard";
 
 export default function PokemonDetailsScreen() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function PokemonDetailsScreen() {
     <View style={styles.container}>
       {loading && <PokemonDetailedCardLoading />}
       {pokemonData && <PokemonDetailedCard {...pokemonData} />}
+      {!pokemonData && !loading && <PokemonNotFoundCard />}
       {pokemonData?.__local && <Button onPress={handleRemove} text="Remove" />}
     </View>
   );
