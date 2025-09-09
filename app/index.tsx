@@ -1,15 +1,23 @@
-import { useMemo } from "react";
-import { Link } from "expo-router";
+import { useMemo, useState } from "react";
+import { Link, useRouter } from "expo-router";
 import { FlatList, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { usePokemonList } from "@/hooks/usePokemonList";
 import { Text, View } from "@/components/Themed";
+import { InputSearch } from "@/components/ui/InputSearch";
 import { FloatingButton } from "@/components/ui/FloatingButton";
 import { PokemonCard, PokemonCardLoading } from "@/components/ui/PokemonCard";
 
 export default function ListScreen() {
+  const router = useRouter();
+  const [inputValue, setInputValue] = useState("");
   const { pokemonData, loading, handleEndReached } = usePokemonList();
+
+  const handleInputBlur = () => {
+    setInputValue("");
+    router.push(`/pokemon/${inputValue}`);
+  };
 
   const hasData = useMemo(() => !!pokemonData.length, [pokemonData]);
 
@@ -32,6 +40,12 @@ export default function ListScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>List of Pokémon</Text>
+      <InputSearch
+        placeholder="Search by name or id"
+        value={inputValue}
+        onChangeText={setInputValue}
+        onPressSearch={handleInputBlur}
+      />
       {!!hasData && (
         <FlatList
           key={"pokemon-list"}
@@ -54,6 +68,8 @@ export default function ListScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
     padding: 12,
     gap: 8,
