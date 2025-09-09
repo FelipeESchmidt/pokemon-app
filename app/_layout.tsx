@@ -66,7 +66,6 @@ function RootLayoutNav() {
         }}
       >
         <Stack.Screen name="index" />
-        <Stack.Screen name="custom/[id]" />
         <Stack.Screen name="pokemon/[id]" />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
