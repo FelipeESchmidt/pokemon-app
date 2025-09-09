@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
@@ -18,11 +19,11 @@ export default function PokemonDetailsScreen() {
 
   const { pokemonData, loading } = usePokemonDetailed(pokemonIdOrName);
 
-  const handleRemove = () => {
+  const handleRemove = useCallback(() => {
     remove(pokemonIdOrName);
     Alert.alert("Success", `Removed ${pokemonData?.name}`);
     router.back();
-  };
+  }, [remove, pokemonIdOrName, pokemonData?.name, router]);
 
   return (
     <View style={styles.container}>
