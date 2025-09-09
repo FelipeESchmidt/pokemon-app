@@ -1,7 +1,6 @@
-import { View as UnthemedView, StyleSheet, useColorScheme } from "react-native";
+import { View as UnthemedView, StyleSheet } from "react-native";
 
 import { Pokemon } from "@/types/pokemon";
-import Colors from "@/constants/Colors";
 import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 import { transformPokemonDetailedToSimple } from "@/helpers/transformPokemonDetailedToSimple";
 
@@ -10,22 +9,21 @@ import { Avatar } from "./Avatar";
 import { FavoriteButton } from "./FavoriteButton";
 import { PokemonStats } from "./PokemonStats";
 import { PokemonAbilities } from "./PokemonAbilities";
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 
 export const PokemonDetailedCard = (pokemon: Pokemon) => {
   const { name, sprites, height, weight, types, abilities, stats } = pokemon;
-  const simplePokemon = transformPokemonDetailedToSimple(pokemon);
-  const { isFavorite, change } = useFavoritesPokemons();
-  const colorScheme = useColorScheme();
 
-  const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
-  const textColor = Colors[colorScheme ?? "light"].cardText;
-  const principalColor = Colors[colorScheme ?? "light"].principal;
+  const { isFavorite, change } = useFavoritesPokemons();
+  const { principal, cardBackground, cardText } = useThemeColorsContext();
+
+  const simplePokemon = transformPokemonDetailedToSimple(pokemon);
 
   return (
-    <View style={[styles.card, { backgroundColor }]}>
+    <View style={[styles.card, { backgroundColor: cardBackground }]}>
       <UnthemedView style={styles.topContainer}>
         <UnthemedView style={styles.infoContainer}>
-          <Text style={[styles.title, { color: textColor }]}>{name}</Text>
+          <Text style={[styles.title, { color: cardText }]}>{name}</Text>
         </UnthemedView>
         <FavoriteButton
           isFavorite={isFavorite(simplePokemon)}
@@ -39,43 +37,40 @@ export const PokemonDetailedCard = (pokemon: Pokemon) => {
         />
         <UnthemedView style={styles.infosContainer}>
           {height && (
-            <Text style={[styles.details, { color: textColor }]}>
+            <Text style={[styles.details, { color: cardText }]}>
               Height: {height} m
             </Text>
           )}
           {weight && (
-            <Text style={[styles.details, { color: textColor }]}>
+            <Text style={[styles.details, { color: cardText }]}>
               Weight: {weight} kg
             </Text>
           )}
           {types?.length && (
-            <Text style={[styles.details, { color: textColor }]}>
+            <Text style={[styles.details, { color: cardText }]}>
               Types: {types.map((type) => type).join(", ")}
             </Text>
           )}
         </UnthemedView>
       </UnthemedView>
-      <PokemonAbilities abilities={abilities} principalColor={principalColor} />
+      <PokemonAbilities abilities={abilities} principalColor={principal} />
       <PokemonStats
         stats={stats}
-        textColor={textColor}
-        principalColor={principalColor}
+        textColor={cardText}
+        principalColor={principal}
       />
     </View>
   );
 };
 
 export const PokemonDetailedCardLoading = () => {
-  const colorScheme = useColorScheme();
-
-  const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
-  const textColor = Colors[colorScheme ?? "light"].cardText;
+  const { cardBackground, cardText } = useThemeColorsContext();
 
   return (
-    <View style={[styles.card, { backgroundColor }]}>
+    <View style={[styles.card, { backgroundColor: cardBackground }]}>
       <UnthemedView style={styles.topContainer}>
         <UnthemedView style={styles.infoContainer}>
-          <Text style={[styles.title, { color: textColor }]}>Loading...</Text>
+          <Text style={[styles.title, { color: cardText }]}>Loading...</Text>
         </UnthemedView>
         <FavoriteButton isFavorite={Math.random() < 0.5} onPress={() => {}} />
       </UnthemedView>

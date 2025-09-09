@@ -1,13 +1,8 @@
 import { FontAwesome } from "@expo/vector-icons";
-import {
-  GestureResponderEvent,
-  StyleSheet,
-  useColorScheme,
-  Pressable,
-} from "react-native";
+import { GestureResponderEvent, StyleSheet, Pressable } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { useCallback } from "react";
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 
 export interface FavoriteButtonProps {
   isFavorite: boolean;
@@ -18,7 +13,7 @@ export const FavoriteButton = ({
   isFavorite,
   onPress,
 }: FavoriteButtonProps) => {
-  const colorScheme = useColorScheme();
+  const { gold, text } = useThemeColorsContext();
 
   const handlePress = useCallback(
     (e: GestureResponderEvent) => {
@@ -30,10 +25,10 @@ export const FavoriteButton = ({
 
   const getColor = useCallback(() => {
     if (isFavorite) {
-      return Colors[colorScheme ?? "light"].gold;
+      return gold;
     }
-    return Colors[colorScheme ?? "light"].text;
-  }, [colorScheme, isFavorite]);
+    return text;
+  }, [isFavorite]);
 
   return (
     <Pressable style={styles.container} onPress={handlePress}>

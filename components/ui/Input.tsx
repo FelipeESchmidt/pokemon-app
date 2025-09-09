@@ -7,9 +7,8 @@ import {
 } from "react-native";
 import { FieldError } from "react-hook-form";
 
-import Colors from "@/constants/Colors";
-
 import { Text } from "../Themed";
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 
 export interface InputProps extends TextInputProps {
   label?: string;
@@ -23,20 +22,18 @@ export function Input({
   customErrorMessage,
   ...inputProps
 }: InputProps) {
-  const colorScheme = useColorScheme();
-  const dangerColor = Colors[colorScheme ?? "light"].danger;
-  const textColor = Colors[colorScheme ?? "light"].text;
+  const { danger, cardText } = useThemeColorsContext();
 
   return (
     <View style={styles.inputContainer}>
-      {!!label && <Text style={{ color: textColor }}>{label}</Text>}
+      {!!label && <Text style={{ color: cardText }}>{label}</Text>}
       <TextInput
         {...inputProps}
         onChangeText={(t) => inputProps.onChangeText?.(t)}
-        style={[styles.input, { color: textColor }]}
+        style={[styles.input, { color: cardText }]}
       />
       {!!error && (
-        <Text style={{ color: dangerColor }}>
+        <Text style={{ color: danger }}>
           {customErrorMessage || error.message}
         </Text>
       )}

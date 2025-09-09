@@ -1,24 +1,22 @@
 import { useMemo, useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { FlatList, StyleSheet, useColorScheme } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
-import Colors from "@/constants/Colors";
 import { usePokemonList } from "@/hooks/usePokemonList";
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
+import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 import { Text, View } from "@/components/Themed";
 import { InputSearch } from "@/components/ui/InputSearch";
 import { FloatingButton } from "@/components/ui/FloatingButton";
 import { PokemonCard, PokemonCardLoading } from "@/components/ui/PokemonCard";
-import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 
 export default function ListScreen() {
-  const colorScheme = useColorScheme();
+  const { gold } = useThemeColorsContext();
   const router = useRouter();
   const { favorites } = useFavoritesPokemons();
   const [inputValue, setInputValue] = useState("");
   const { pokemonData, loading, handleEndReached } = usePokemonList();
-
-  const goldColor = Colors[colorScheme ?? "light"].gold;
 
   const handleInputBlur = () => {
     setInputValue("");
@@ -52,7 +50,7 @@ export default function ListScreen() {
             <FontAwesome
               name="star-half-full"
               size={25}
-              style={{ color: goldColor }}
+              style={{ color: gold }}
             />
           </Link>
         )}

@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 import { Text } from "../Themed";
-import Colors from "@/constants/Colors";
 
 export interface ButtonProps {
   onPress?: () => void;
@@ -9,15 +9,14 @@ export interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ onPress, text }) => {
-  const colorScheme = useColorScheme();
-  const principalColor = Colors[colorScheme ?? "light"].principal;
+  const { principal, text: textColor } = useThemeColorsContext();
 
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.btn, { backgroundColor: principalColor }]}
+      style={[styles.btn, { backgroundColor: principal }]}
     >
-      <Text style={styles.btnTxt}>{text}</Text>
+      <Text style={[styles.btnTxt, { color: textColor }]}>{text}</Text>
     </Pressable>
   );
 };
@@ -29,5 +28,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
-  btnTxt: { color: "#fff", fontWeight: "700" },
+  btnTxt: { fontWeight: "700" },
 });

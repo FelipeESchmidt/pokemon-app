@@ -1,30 +1,26 @@
 import { Link } from "expo-router";
-import { View as UnthemedView, StyleSheet, useColorScheme } from "react-native";
+import { View as UnthemedView, StyleSheet } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { NamedAPIResource } from "@/types/pokemon";
 import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 
 import { Avatar } from "./Avatar";
 import { Text, View } from "../Themed";
 import { FavoriteButton } from "./FavoriteButton";
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 
 export const PokemonCard = (pokemon: NamedAPIResource) => {
   const { name, url, sprite } = pokemon;
+  const { principal, cardBackground, cardText } = useThemeColorsContext();
   const { isFavorite, change } = useFavoritesPokemons();
-  const colorScheme = useColorScheme();
-
-  const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
-  const textColor = Colors[colorScheme ?? "light"].cardText;
-  const principalColor = Colors[colorScheme ?? "light"].principal;
 
   return (
     <Link href={url}>
-      <View style={[styles.card, { backgroundColor }]}>
+      <View style={[styles.card, { backgroundColor: cardBackground }]}>
         <Avatar uri={sprite} style={styles.sprite} />
         <UnthemedView style={styles.infoContainer}>
-          <Text style={[styles.title, { color: textColor }]}>{name}</Text>
-          <Text style={[styles.details, { color: principalColor }]}>
+          <Text style={[styles.title, { color: cardText }]}>{name}</Text>
+          <Text style={[styles.details, { color: principal }]}>
             Press for details
           </Text>
         </UnthemedView>
@@ -38,16 +34,13 @@ export const PokemonCard = (pokemon: NamedAPIResource) => {
 };
 
 export const PokemonCardLoading = () => {
-  const colorScheme = useColorScheme();
-
-  const backgroundColor = Colors[colorScheme ?? "light"].cardBackground;
-  const textColor = Colors[colorScheme ?? "light"].cardText;
+  const { cardBackground, cardText } = useThemeColorsContext();
 
   return (
-    <View style={[styles.card, { backgroundColor }]}>
+    <View style={[styles.card, { backgroundColor: cardBackground }]}>
       <Avatar style={styles.sprite} />
       <UnthemedView style={styles.infoContainer}>
-        <Text style={[styles.title, { color: textColor }]}>Loading...</Text>
+        <Text style={[styles.title, { color: cardText }]}>Loading...</Text>
       </UnthemedView>
     </View>
   );

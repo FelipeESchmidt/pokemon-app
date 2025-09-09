@@ -1,5 +1,6 @@
-import Colors from "@/constants/Colors";
-import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
+
+import { useThemeColorsContext } from "@/contexts/ThemeColors";
 
 export interface FloatingButtonProps {
   children: React.ReactNode;
@@ -7,12 +8,11 @@ export interface FloatingButtonProps {
 }
 
 export function FloatingButton({ children, onPress }: FloatingButtonProps) {
-  const colorScheme = useColorScheme();
-  const principalColor = Colors[colorScheme ?? "light"].principal;
+  const { principal } = useThemeColorsContext();
 
   return (
     <Pressable
-      style={[styles.button, { backgroundColor: principalColor }]}
+      style={[styles.button, { backgroundColor: principal }]}
       onPress={onPress}
     >
       {children}

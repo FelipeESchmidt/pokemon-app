@@ -10,8 +10,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import Colors from "@/constants/Colors";
+import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
+import { ThemeColorsProvider } from "@/contexts/ThemeColors";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,21 +56,22 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          },
-          headerTintColor: Colors[colorScheme ?? "light"].tint,
-          headerTitleStyle: { fontWeight: "600" },
-          title: "Pokédex",
-        }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="pokemon/[id]" />
-        <Stack.Screen name="favorites" />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
+      <ThemeColorsProvider>
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: Colors[colorScheme ?? "light"].background,
+            },
+            headerTintColor: Colors[colorScheme ?? "light"].tint,
+            headerTitleStyle: { fontWeight: "600" },
+            title: "Pokédex",
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="pokemon/[id]" />
+          <Stack.Screen name="favorites" />
+        </Stack>
+      </ThemeColorsProvider>
     </ThemeProvider>
   );
 }
