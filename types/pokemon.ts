@@ -5,6 +5,7 @@ export type NamedAPIResource = {
   name: string;
   url: Href;
   sprite?: string;
+  __local?: boolean;
 };
 
 export type PokemonListResponse = {

@@ -35,6 +35,7 @@ export const useCustomStore = create<CustomState>()(
             name: pokemon.name,
             url: ("pokemon/" + pokemon.id) as Href,
             sprite: pokemon.sprites?.front_default,
+            __local: pokemon.__local,
           })
         );
       },

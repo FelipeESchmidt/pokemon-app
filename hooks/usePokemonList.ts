@@ -32,9 +32,7 @@ export const usePokemonList = () => {
 
   useEffect(() => {
     const customList = getListAsSimple();
-    const allLoadedPokemon = pokemonData.filter(
-      (p) => !p.url.toString().includes("custom")
-    );
+    const allLoadedPokemon = pokemonData.filter((p) => !p.__local);
     setPokemonData([...customList, ...allLoadedPokemon]);
   }, [custom]);
 
