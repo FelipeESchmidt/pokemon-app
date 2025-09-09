@@ -4,24 +4,26 @@ import { View, Text, StyleSheet } from "react-native";
 import { useThemeColorsContext } from "@/contexts/ThemeColors";
 import { Avatar } from "./Avatar";
 
-export const PokemonNotFoundCard = () => {
+type EmptyListProps = {
+  title?: string;
+  message?: string;
+};
+
+export const EmptyList: React.FC<EmptyListProps> = ({
+  title = "Empty List",
+  message = "No items available at the moment.",
+}) => {
   const { cardBackground, cardText } = useThemeColorsContext();
 
   return (
     <View style={[styles.card, { backgroundColor: cardBackground }]}>
       <View style={styles.topContainer}>
-        <View style={styles.infoContainer}>
-          <Text style={[styles.title, { color: cardText }]}>
-            Pokémon not found
-          </Text>
-          <Text style={[styles.details, { color: cardText }]}>
-            Please try another search or check the spelling.
-          </Text>
-        </View>
+        <Text style={[styles.title, { color: cardText }]}>{title}</Text>
       </View>
       <View style={styles.middleContainer}>
         <Avatar style={styles.sprite} />
       </View>
+      <Text style={[styles.details, { color: cardText }]}>{message}</Text>
     </View>
   );
 };
@@ -30,43 +32,34 @@ const styles = StyleSheet.create({
   card: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
-    padding: 16,
+    padding: 20,
     elevation: 2,
-    gap: 24,
+    gap: 16,
   },
   topContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-start",
     width: "100%",
+    alignItems: "center",
   },
   middleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
     width: "100%",
-  },
-  infoContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 4,
-    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "left",
   },
   details: {
     fontSize: 14,
+    textAlign: "center",
     opacity: 0.8,
   },
   sprite: {
     width: 96,
     height: 96,
-    opacity: 0.5,
+    opacity: 0.4,
   },
 });

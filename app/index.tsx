@@ -7,6 +7,7 @@ import { usePokemonList } from "@/hooks/usePokemonList";
 import { useThemeColorsContext } from "@/contexts/ThemeColors";
 import { useFavoritesPokemons } from "@/store/favoritesPokemons";
 import { Text, View } from "@/components/Themed";
+import { EmptyList } from "@/components/ui/EmptyList";
 import { InputSearch } from "@/components/ui/InputSearch";
 import { FloatingButton } from "@/components/ui/FloatingButton";
 import { PokemonCard, PokemonCardLoading } from "@/components/ui/PokemonCard";
@@ -72,6 +73,7 @@ export default function ListScreen() {
         />
       )}
       {renderLoading()}
+      {!loading && !hasData && <EmptyList />}
       <FloatingButton onPress={() => {}}>
         <Link href="/new" style={styles.newButton}>
           <FontAwesome name="plus" size={25} style={{ color: "white" }} />
