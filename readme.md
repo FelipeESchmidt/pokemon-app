@@ -44,4 +44,5 @@ The data can be fetched from PokeAPI, please check this documentation that conta
 ### Bonus points:
 
 - An authentication screen to login with a dummy user.
-- Feature to save favorite Pokemon with separate screen to list them. - Search for a pokemon using Pokemon id or name
+- Feature to save favorite Pokemon with separate screen to list them.
+- Search for a pokemon using Pokemon id or name

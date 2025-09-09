@@ -9,9 +9,9 @@ import {
 
 export default function PokemonDetailsScreen() {
   const { id } = useLocalSearchParams();
-  const idToSearch = Number(id);
+  const pokemonIdOrName = Array.isArray(id) ? id[0] : id;
 
-  const { pokemonData, loading } = usePokemonDetailed(idToSearch);
+  const { pokemonData, loading } = usePokemonDetailed(pokemonIdOrName);
 
   return (
     <View style={styles.container}>

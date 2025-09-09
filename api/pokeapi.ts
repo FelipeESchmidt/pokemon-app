@@ -20,7 +20,7 @@ export const getPokemonList = async (
   return normalizePokemonListResponse(await res.json());
 };
 
-export const getPokemonById = async (id: number): Promise<Pokemon> => {
+export const getPokemonByIdOrName = async (id: string): Promise<Pokemon> => {
   const url = `${BASE}/pokemon/${id}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Pokemon fetch failed: ${res.status}`);
