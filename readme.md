@@ -46,3 +46,7 @@ The data can be fetched from PokeAPI, please check this documentation that conta
 - An authentication screen to login with a dummy user.
 - Feature to save favorite Pokemon with separate screen to list them.
 - Search for a pokemon using Pokemon id or name
+
+### Screenshots
+
+![list loading](/assets/screenshots/1-loading-all.jpeg "List loading")
