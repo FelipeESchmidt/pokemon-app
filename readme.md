@@ -49,6 +49,18 @@ The data can be fetched from PokeAPI, please check this documentation that conta
 
 ### Screenshots
 
-| Description  | Image                                                            |
-| ------------ | ---------------------------------------------------------------- |
-| List loading | <img src="/assets/screenshots/1-loading-all.jpeg" height="200"/> |
+| Description         | Image                                                                  |
+| ------------------- | ---------------------------------------------------------------------- |
+| List loading        | <img src="/assets/screenshots/1-loading-all.jpeg" height="350"/>       |
+| List all            | <img src="/assets/screenshots/2-list-all.jpeg" height="350"/>          |
+| Infinite scroll     | <img src="/assets/screenshots/3-infinite-scroll.jpeg" height="350"/>   |
+| Favorites in list   | <img src="/assets/screenshots/4-favorites-in-list.jpeg" height="350"/> |
+| List favorites      | <img src="/assets/screenshots/5-favorites-page.jpeg" height="350"/>    |
+| Loading details     | <img src="/assets/screenshots/6-loading-details.jpeg" height="350"/>   |
+| Details             | <img src="/assets/screenshots/7-details.jpeg" height="350"/>           |
+| Form with errors    | <img src="/assets/screenshots/8-form-errors.jpeg" height="350"/>       |
+| Form adding new one | <img src="/assets/screenshots/9-form-new-one.jpeg" height="350"/>      |
+| Added custom        | <img src="/assets/screenshots/10-add-custom.jpeg" height="350"/>       |
+| Custom in list      | <img src="/assets/screenshots/11-custom-in-list.jpeg" height="350"/>   |
+| Custom details      | <img src="/assets/screenshots/12-custom-details.jpeg" height="350"/>   |
+| Removed custom      | <img src="/assets/screenshots/13-custom-removed.jpeg" height="350"/>   |
