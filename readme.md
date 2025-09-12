@@ -49,4 +49,6 @@ The data can be fetched from PokeAPI, please check this documentation that conta
 
 ### Screenshots
 
-![list loading](/assets/screenshots/1-loading-all.jpeg "List loading")
+| Description  | Image                                                            |
+| ------------ | ---------------------------------------------------------------- |
+| List loading | <img src="/assets/screenshots/1-loading-all.jpeg" height="200"/> |
